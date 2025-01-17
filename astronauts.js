@@ -23,7 +23,7 @@ function main() {
         task3();
         break;
       case 4:
-        task4();
+        displayAstronautsTask();
         break;
       default:
         console.log(option + ' is an invalid choice, please try again');
@@ -43,7 +43,7 @@ function task1() {
       rl.question('Enter the new number of days in space: ', newDaysInSpace => {
         all_astronauts[astronautIndex][DAYS_INDEX] = parseInt(newDaysInSpace);
         console.log('\nUpdated astronaut details:');
-        displayAstronauts(astronautIndex);
+        displayAllAstronauts(astronautIndex);
         console.log('');
         main();
       });
@@ -69,7 +69,7 @@ function task2() {
           all_astronauts.push([spacecraft, astronautName, parseInt(daysInSpace)]);
           console.log('New astronaut added.\n');
 
-          displayAstronauts();
+          displayAllAstronauts();
 
           const totalDays = calculateTotalDaysInSpace();
           console.log('\nTotal days spent by all astronauts: ' + totalDays + '\n');
@@ -103,9 +103,9 @@ function task3() {
   });
 }
 
-function task4() {
+function displayAstronautsTask() {
   console.log('\nAll astronaut details:');
-  displayAstronauts();
+  displayAllAstronauts();
   console.log('');
   main();
 }
@@ -132,12 +132,6 @@ function formatSpacecraft(spacecraftInput) {
   const match = uniqueSpacecrafts.find(craft => craft.toLowerCase() === lowerCaseInput);
 
   return match ? match : spacecraftInput;
-}
-
-function displayAvailableSpacecraft() {
-  const spacecrafts = all_astronauts.map(astronaut => astronaut[CRAFT_INDEX]);
-  const uniqueSpacecrafts = [...new Set(spacecrafts)];
-  console.log('Available spacecraft: ' + uniqueSpacecrafts.join(', '));
 }
 
 function findMatchingAstronauts(input) {
@@ -198,7 +192,7 @@ function displaySpecificAstronauts(astronauts) {
   });
 }
 
-function displayAstronauts(highlight) {
+function displayAllAstronauts(highlight) {
   const sortedAstronauts = sortAstronauts([...all_astronauts], true);
   if (highlight === undefined) {
     sortedAstronauts.forEach(astronaut => {
@@ -213,6 +207,12 @@ function displayAstronauts(highlight) {
       console.log(`Craft: ${astronaut[CRAFT_INDEX]}, Name: ${astronaut[NAME_INDEX]}, Days in space: ${astronaut[DAYS_INDEX]}${highlightMarker}`);
     });
   }
+}
+
+function displayAvailableSpacecraft() {
+  const spacecrafts = all_astronauts.map(astronaut => astronaut[CRAFT_INDEX]);
+  const uniqueSpacecrafts = [...new Set(spacecrafts)];
+  console.log('Available spacecraft: ' + uniqueSpacecrafts.join(', '));
 }
 
 main();
