@@ -66,10 +66,11 @@ function task2() {
                     console.log('');
                     main();
                 } else {
+                    const newAstronautIndex = all_astronauts.length;
                     all_astronauts.push([spacecraft, astronautName, parseInt(daysInSpace)]);
                     console.log('New astronaut added.\n');
 
-                    displayAllAstronauts();
+                    displayAllAstronauts(newAstronautIndex);
 
                     const totalDays = calculateTotalDaysInSpace();
                     console.log('\nTotal days spent by all astronauts: ' + totalDays + '\n');
